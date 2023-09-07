@@ -1,4 +1,4 @@
-def rot13(message):
+def rot13_fn(message: str) -> str:
     alphabets = ["A", "B", "C", "D", "E", "F",
                  "G", "H", "I", "J", "K", "L", "M",
                  "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
@@ -7,23 +7,21 @@ def rot13(message):
                    "T", "U", "V", "W", "X", "Y", "Z",
                    "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M"]
     results = []
-    message_copy = list(message)
+    message_copy_as_lst = list(message)
 
-    for l in message_copy:
+    for l in message_copy_as_lst:
         try:
             index = alphabets.index(l.upper())  # get index of the letter from the alphabets list.
             if l == alphabets[index]:  # if the letter is uppercase append it's R0T13 equivalent as uppercase.
                 results.append(rot_13_dict[index])
             else:  # if the letter is lowercase append it's R0T13 equivalent as lowercase.
                 results.append((rot_13_dict[index]).lower())
-        except ValueError:  # append the member as it is if not an alphabet
+        except ValueError:  # append the element as it is if not a latin/english alphabet
             results.append(l)
 
     return ''.join(results)
 
-
-print(rot13("Gb trg gb gur bgure fvqr!"))
-
-# test.assert_equals(rot13('test'), 'grfg', 'Returned solution incorrect for fixed string = test')
-# test.assert_equals(rot13('Test'), 'Grfg', 'Returned solution incorrect for fixed string = Test')
-# test.assert_equals(rot13('aA bB zZ 1234 *!?%'), 'nN oO mM 1234 *!?%', 'Returned solution incorrect for fixed string = aA bB zZ 1234 *!?%')
+input = "ahaha$!"
+if __name__ == "__main__":
+    result = rot13_fn(input)
+    print(f"'{input}' is encrypted to '{result}' by ROT-13 Cipher.")
